@@ -1,0 +1,50 @@
+*, *::before, *::after {
+  box-sizing: border-box; }
+
+html, body,
+div, header, footer, article, aside, main, section, nav,
+ol, ul, li, hr
+img, svg,
+form, label, legend, fieldset {
+  padding: 0;
+  margin: 0;
+  border: none; }
+
+img {
+  max-width: 100%; }
+
+a {
+  text-decoration: none;
+  transition-duration: 320ms;
+  transition-property: color, background-color, text-decoration;
+  transition-timing-function: cubic-bezier(1, 0, 0, 1); }
+
+html {
+  font-size: 125%; }
+
+body {
+  font-family: helvetica, arial, sans-serif;
+  line-height: 1.6; }
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: helvetica, arial, sans-serif;
+  margin-top: 0; }
+
+pre, code {
+  font-family: monospace; }
+
+label, input, textarea, select {
+  font-family: helvetica, arial, sans-serif; }
+
+#clock {
+  height: 100vh;
+  width: 100vw; }
+
+h1 {
+  font-size: 10rem;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #fff;
+  font: helvetica, arial, sans-serif; }

@@ -1,30 +1,66 @@
-var main = function(){
-    const clock = document.getElementById('clock');
-    const display = document.querySelector('h1');
+const hexClock = ( function() {
 
-    function addLeadingZero(num) {
-        if ( num < 10 ) {
-            return "0" + num;
-        } else {
-            return num;
-        }
-    }
+	// Private variables
+	const clock = document.getElementById( 'clock' );
+	const display = document.querySelector( 'h1' );
 
-    function lightenColour(color){
-        return (color.toString(10) / 0.25).toString(16);
-    }
+	// Private methods
+	const _addLeadingZero = function( num ) {
+		if ( 10 > num ) {
+			return '0' + num;
+		}
+		else {
+			return num;
+		}
+	};
 
-    function updateScreen() {
-        const now = new Date();
-        let minutes = addLeadingZero(now.getMinutes());
-        let seconds = addLeadingZero(now.getSeconds());
-        let hours = addLeadingZero(now.getHours());
+	const _getTheColor = function() {
+		const now = new Date();
+		let hours = _addLeadingZero( now.getHours() );
+		let minutes = _addLeadingZero( now.getMinutes() );
+		let seconds = _addLeadingZero( now.getSeconds() );
 
-        display.innerHTML = hours + ":" + minutes + ":" + seconds;
-        clock.style.backgroundColor= "#" + lightenColour(hours) + lightenColour(minutes) + lightenColour(seconds);
-    }
+		return {
+			hours: hours,
+			minutes: minutes,
+			seconds: seconds,
+		};
+	};
 
-    setInterval(updateScreen,1000);
-};
+	var _lightenColour = function( color ){
+		return ( color.toString( 10 ) / 0.25 ).toString( 16 );
+	};
 
-document.addEventListener('DOMContentLoaded', main);
+	var _printClock = function() {
+		let hours = _getTheColor().hours;
+		let minutes = _getTheColor().minutes;
+		let seconds = _getTheColor().seconds;
+
+		display.innerHTML = hours + ':' + minutes + ':' + seconds;
+		clock.style.backgroundColor = '#' + _lightenColour( hours ) + _lightenColour( minutes ) + _lightenColour( seconds );
+	};
+
+	const _updateScreen = function() {
+		_printClock();
+	};
+
+	// Public methods
+	const init = function() {
+		setInterval( _updateScreen, 1000 );
+	};
+
+
+	// Assign public methods to api
+
+	const api = {
+		init: init,
+	};
+
+	return api;
+
+} )();
+
+document.addEventListener(
+	'DOMContentLoaded',
+	hexClock.init()
+);
